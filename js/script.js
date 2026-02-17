@@ -1569,3 +1569,38 @@ window.closeTermsModal = () => {
 }
 
 document.addEventListener('DOMContentLoaded', init);
+
+/* ========================================
+   MOBILE MENU LOGIC
+   ======================================== */
+window.toggleMobileMenu = () => {
+    const sidebar = document.getElementById('mobile-sidebar');
+    const backdrop = document.getElementById('mobile-backdrop');
+
+    if (!sidebar || !backdrop) return;
+
+    if (sidebar.classList.contains('translate-x-full')) {
+        // OPEN MENU
+        sidebar.classList.remove('translate-x-full');
+
+        backdrop.classList.remove('hidden');
+        // Small delay to allow display:block to apply before opacity transition
+        setTimeout(() => {
+            backdrop.classList.remove('opacity-0');
+        }, 10);
+
+        document.body.style.overflow = 'hidden';
+    } else {
+        // CLOSE MENU
+        sidebar.classList.add('translate-x-full');
+
+        backdrop.classList.add('opacity-0');
+
+        // Wait for transition to finish before hiding
+        setTimeout(() => {
+            backdrop.classList.add('hidden');
+        }, 300);
+
+        document.body.style.overflow = '';
+    }
+};
